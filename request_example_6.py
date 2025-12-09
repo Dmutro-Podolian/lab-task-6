@@ -1,12 +1,13 @@
 import logging
 
-class FileNotFound(Exception):
-    pass
+class FileNotFound(OSError):
+    """Exception raised when a file is not found."""
 
-class FileCorrupted(Exception):
-    pass
+class FileCorrupted(OSError):
+    """Exception raised when a file is corrupted."""
 
 def logger(exeption, mode):
+    """Decorator for logging exceptions to console or file."""
     def decorator(func):
         def wrapper(*args, **kwargs):
             logger = logging.getLogger(func.__name__)
@@ -35,6 +36,7 @@ def logger(exeption, mode):
     return decorator
 
 class CSVFileEditor:
+    """Class for editing CSV files."""
     def __init__(self, path, file_name):
         self.path = path
         self.file_name = file_name
@@ -68,6 +70,7 @@ class CSVFileEditor:
 csv_file = CSVFileEditor("csv.csv", "csv.scv")
 
 if __name__ == "__main__":
+    """Main program for user interaction."""
     while True:
         print("Меню:")
         print("Щоб прочитати файл введіть 1")
